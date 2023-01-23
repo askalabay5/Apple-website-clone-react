@@ -1,0 +1,167 @@
+API Integration - Youtube API
+******************************   
+
+	What is API - Application Programming Interface 
+	*********************************************** 
+
+		- Interface is the Keyword in here. An API is an interface between an application and developers who are trying to use the out put of the application 
+
+		- If you are an owner of an application, and you are willing to open up some of the data in your database to external developers, you don't want to provide them a direct access to the Databse. What you prefer to do is, create an interface that returns some pre-selected list of things as per the developers request 
+
+		- It would be the application owners responsibility to write the interface code (API) that returns the requested data. Depending on how the API is written, the writters need to provide instructions on how to make the requests. There is no standard way of making API requests. 
+
+		- For this to make sense to you, we will see an example on how to use one of Google's APIs    
+
+	What is JSON? 
+	*************
+
+		- JSON stands for JavaScript Object Notation 
+		
+		- In the same category as XML, JSON is also a format for storing and transporting data
+
+		- The reson why JSON is prefered by most application as a way of sending data is it's simplicity to understand by the user of the data 
+
+		JSON Format:
+		************ 
+
+			- JSON is very similar with how  JavaScript structures objects.
+
+			- Because of this similarity, a JavaScript program can easily convert JSON data into native JavaScript objects.
+
+			Example:
+				{
+					"students":[
+					    {"firstName":"Abebe", "lastName":"Bekele"},
+					    {"firstName":"Almaz", "lastName":"Debebe"},
+					    {"firstName":"Challa", "lastName":"Kebede"}
+					]
+				}
+
+
+	Array Map funtion
+	***************** 
+
+		- The Map function is a method that is defined inside the JavaScript Array class. 
+
+		- The Job of the Map method is to take one Array, apply some kind of manupilation on each elements of the Array and create another Array containing the new values 
+
+		Ex: 
+			- Lets say we have this Array A
+				var a = [1,2,3,4];
+
+			- If say for example we want an array with the tripple values of each of the elements in A, then we can use the Map method in here. 
+
+			- The map method takes a function that is going to be applied on each element of the Array that it is called on 
+				- It takes three arguments 
+					(currentValue, index, array)
+				- It is optional to pass all three 
+
+			- We can map Array a to a new Array b like this 
+
+				var b = a.map(x => x * 3);
+				b = [3,6,9,12];
+
+
+	React Life cycle methods
+	************************  
+
+		mounting: Whenever component is rendered on DOM for the first time 
+		unmounting: Whenever the component added on DOM is removed 
+
+		componentDidMount() {
+			// Write you script in here if you want to do something right after the component is added on DOM 
+		}
+
+		componentWillUnmount() {
+			// Write you script in here if you want to do something right after the component is removed from DOM 
+		}
+
+		Ref:
+			https://www.w3schools.com/react/react_lifecycle.asp 
+
+
+
+
+	How to create YouTube API Key? 
+	******************************
+
+		- API Key is like a user name and password for your request. Most API providers require you to get an API key just for the sake of avoiding scammers 
+
+		- Here is how you can get an API Key to use Google APIs  
+
+		Step 1: Go Google Console https://console.cloud.google.com/
+			- Login 
+		
+
+		Step 2: Create a project 
+		Look on the top bar where you can select or create a new project 
+
+		Step 3: Create an API Key 
+			- Go to API and Services section 
+			- Go to the library section 
+			- Scroll down until you find the Youtube section 
+			- Click on YouTube Data API v3
+			- Enable your API 
+			- Create credentials 
+				- Select YouTube Data v3 API 
+				- Web browser 
+				- Public data access 
+		    - Copy your API key 
+
+
+		    	AIzaSyDpEh_N-v0XeidW96jdyjUINcEpbzVGq7k
+
+
+
+	How to call some JSON data from YouTube? 
+	**************************************** 
+
+
+		- The main link you use to communicate with google APIs 
+		https://www.googleapis.com/youtube/v3
+
+		- This is how you construct your YouTube API request 
+
+		https://www.googleapis.com/youtube/v3/search?key={YOUR_API_KEY}&channelId={channel_id_here}&part=snippet,id&order=date&maxResults=10
+
+		- To get the channel ID 
+			- If the channel you are looking for hasn't set a unique channel URL yet, you can easily get the channel id by going directly to the channel and grab the id from the address bar 
+
+		- If the channel has a unique channel name set, you can then make an API request using the channel name and get the channel ID 
+
+			Format: 
+			https://www.googleapis.com/youtube/v3/channels?key={YOUR_API_KEY}&forUsername={CHANNEL_NAME}&part=id
+
+
+			https://www.googleapis.com/youtube/v3/channels?key=AIzaSyB4xNW_TeLDTO9tKxmHQAZskoy9Na0sxR0&forUsername=Apple&part=id
+
+				id = UCE_M8A5yxnLfW0KghEeajjw 
+
+		- Final API request URL 
+
+			https://www.googleapis.com/youtube/v3/search?key=AIzaSyB4xNW_TeLDTO9tKxmHQAZskoy9Na0sxR0&channelId=UCE_M8A5yxnLfW0KghEeajjw&part=snippet,id&order=date&maxResults=10
+
+			- To test if the URL is working, just copy and paste it on your browser 
+
+	
+	How to use the JSON data in a react component 
+	*********************************************
+		- Take a look at the Youtube Component on React 
+		
+
+
+Format: 
+
+        https://www.googleapis.com/youtube/v3/search?key= AIzaSyDOumyymtUOH3FUTIjYETtBx-6e4-DFbgg&channelId=UCE_M8A5yxnLfW0KghEeajjw&part=snippet,id&order=date&maxResults=9
+
+
+
+
+key= AIzaSyDOumyymtUOH3FUTIjYETtBx-6e4-DFbgg
+
+
+format:
+		https://www.googleapis.com/youtube/v3/channels?key= AIzaSyDOumyymtUOH3FUTIjYETtBx-6e4-DFbgg&forUsername=Apple&part=id
+
+
+        id=UCE_M8A5yxnLfW0KghEeajjw
